@@ -1,4 +1,5 @@
 function initMap() {
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 5,
         center: { lat: -9.1191427, lng: -77.0349046 },
@@ -7,6 +8,16 @@ function initMap() {
         streetViewControl: false
     });
 
+    // Agregando autocompletado de primer input
+    var input = (document.getElementById('first-input'));
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo('bounds', map);
+
+    // Agregando autocompletado de segundo input
+    var input = (document.getElementById('second-input'));
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo('bounds', map);
+
     function buscar() {
         if (navigator.geolocation) {
             // Permite al usuario obtener su ubicacion actual
@@ -14,7 +25,7 @@ function initMap() {
         }
     }
 
-    document.getElementById('encuentrame').addEventListener('click', buscar);
+    document.getElementById('origen').addEventListener('click', buscar);
     var latitud, longitud;
 
     var funcionExito = function(posicion) {
